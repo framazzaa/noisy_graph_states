@@ -103,6 +103,5 @@ def test_pattern_custom_b0():
     sequences = pattern_to_sequence(
         pattern=input_pattern, graph=start_graph, support_nodes=support_nodes
     )
-    
     assert sequences[0][0] == "x"  and sequences[0][1] == 1 and sequences[0][2] == 2  # First measurement should be x on qubit 1 with b0=2
     assert sequences[1][0] == "x"  and sequences[1][1] == 3 and sequences[1][2] == 4  # Second measurement should be x on qubit 3 with b0=4

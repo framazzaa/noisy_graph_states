@@ -235,6 +235,6 @@ def pattern_to_all_sequences(pattern: list, graph: nx.Graph):
                         elif v == "z":
                             match[k] = "x"
                 graph = gt.measure_x(graph=graph, index=qubit_index, b0=b0)
-            sequence.append((effective_instruction, qubit_index, None))
+            sequence.append((effective_instruction, qubit_index))
         sequences.append(sequence)
     return sequences
