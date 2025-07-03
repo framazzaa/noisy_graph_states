@@ -96,12 +96,15 @@ def test_pattern_all_reversible_general():
 
 
 def test_pattern_custom_b0():
-    """Test that the b0 parameter is correctly applied in the pattern_to_sequence function."""
-    start_graph = nx.Graph([(0, 1), (1, 2), (2, 3), (3, 4)])
-    input_pattern = [".", "x", ".", "x", "."]
-    support_nodes = [2, 4]  
-    sequences = pattern_to_sequence(
-        pattern=input_pattern, graph=start_graph, support_nodes=support_nodes
-    )
-    assert sequences[0][0] == "x"  and sequences[0][1] == 1 and sequences[0][2] == 2  # First measurement should be x on qubit 1 with b0=2
-    assert sequences[1][0] == "x"  and sequences[1][1] == 3 and sequences[1][2] == 4  # Second measurement should be x on qubit 3 with b0=4
+    """Test that the b0 parameter is correctly applied in the pattern_to_sequence function for a linear graph."""
+    for N in range(2, 10):
+        start_graph = nx.Graph([(i, i + 1) for i in range(N - 1)])
+        input_pattern = ["x" if i % 2 != 0 else "." for i in range(N)]
+        support_nodes = [i for i in range(N-1) if i % 2 == 0]
+        sequences = pattern_to_sequence(
+            pattern=input_pattern, graph=start_graph, support_nodes=support_nodes
+        )
+        for idx, support_node in enumerate(support_nodes):
+            assert sequences[idx][0] == "x"
+            assert sequences[idx][1] == support_node+1
+            assert sequences[idx][2] == support_node
