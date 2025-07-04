@@ -242,6 +242,7 @@ def check_equality(graph1, graph2):
     """
     return nx.utils.graphs_equal(graph1, graph2)
 
+
 def update_graph_cnot(graph, source, target):
     """Returns the graph state after a CNOT between source and target.
 
